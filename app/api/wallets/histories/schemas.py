@@ -1,7 +1,5 @@
-from datetime import datetime
 from pydantic import Field, PositiveInt
-from app.models import BaseModel, HistoryType
-from app.utils.datetime import utcnow
+from app.models import BaseModel, HistoryType, UTCDatetime
 
 class History(BaseModel):
     history_id: int
@@ -9,7 +7,7 @@ class History(BaseModel):
     amount: PositiveInt
     type: HistoryType = Field(
         ..., description="INCOME:収入, OUTCOME:支出")
-    history_at: datetime = Field(
+    history_at: UTCDatetime = Field(
         ..., description="収支項目の発生日時（UTC）")
 
 class GetHistoryResponse(History):
@@ -23,7 +21,7 @@ class PostHistoryRequest(BaseModel):
     amount: PositiveInt
     type: HistoryType = Field(
         ..., description="INCOME:収入, OUTCOME:支出")
-    history_at: datetime = Field(
+    history_at: UTCDatetime = Field(
         ..., description="収支項目の発生日時（UTC）")
 
 class PostHistoryResponse(History):
@@ -34,7 +32,7 @@ class PutHistoryRequest(BaseModel):
     amount: PositiveInt
     type: HistoryType = Field(
         ..., description="INCOME:収入, OUTCOME:支出")
-    history_at: datetime = Field(
+    history_at: UTCDatetime = Field(
         ..., description="収支項目の発生日時（UTC）")
 
 class PutHistoryResponse(History):

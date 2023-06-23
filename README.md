@@ -18,8 +18,8 @@ WEB+DB PRESS Vol.136 特集記事「Python最新Web開発」の第6章のソー�
 ```bash
 $ python3 -m venv env
 $ . env/bin/activate
-(env) $ pip install fastapi==0.95.2 \
- 'SQLAlchemy[aiosqlite]==2.0.16' \
+(env) $ pip install fastapi==0.100.0 \
+ 'SQLAlchemy[aiosqlite]==2.0.18' \
  'uvicorn[standard]==0.22.0'
 ```
 
@@ -32,7 +32,7 @@ $ . env/bin/activate
 ## ユニットテストの実行
 
 ```bash
-(env) $ pip install pytest==7.2 httpx==0.24.1
+(env) $ pip install pytest==7.4.0 httpx==0.24.1
 (env) $ pytest app -v
 ```
 

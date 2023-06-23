@@ -12,6 +12,7 @@ from .schemas import (
     PostWalletResponse,
     PutWalletRequest,
     PutWalletResponse,
+    Wallet,
 )
 from .use_cases import (
     GetWallet,
@@ -33,7 +34,8 @@ async def get_wallets(
 ) -> GetWalletsResponse:
     """Walletの一覧取得API"""
     return GetWalletsResponse(
-        wallets=await use_case.execute()
+        wallets=[Wallet.model_validate(w)
+            for w in await use_case.execute()]
     )
 
 @router.get(
@@ -57,11 +59,11 @@ async def get_wallet(
     )
     if include_histories:
         return (
-            GetWalletResponseWithHistories.from_orm(
+            GetWalletResponseWithHistories.model_validate(
                 result
             )
         )
-    return GetWalletResponse.from_orm(result)
+    return GetWalletResponse.model_validate(result)
 
 
 @router.post(
@@ -76,7 +78,7 @@ async def post_wallet(
     ],
 ) -> PostWalletResponse:
     """Walletの作成API"""
-    return PostWalletResponse.from_orm(
+    return PostWalletResponse.model_validate(
         await use_case.execute(name=data.name)
     )
 
@@ -93,7 +95,7 @@ async def put_wallet(
     ],
 ) -> PutWalletResponse:
     """Walletの更新API"""
-    return PutWalletResponse.from_orm(
+    return PutWalletResponse.model_validate(
         await use_case.execute(
             wallet_id=wallet_id, name=data.name
         )

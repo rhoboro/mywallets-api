@@ -51,14 +51,14 @@ async def test_get_histories(ac, session: AsyncSession):
                 "history_id": ANY,
                 "name": "egg",
                 "amount": 300,
-                "history_at": "2023-02-01T01:00:00+00:00",
+                "history_at": "2023-02-01T01:00:00Z",
                 "type": "OUTCOME",
             },
             {
                 "history_id": ANY,
                 "name": "ham",
                 "amount": 1000,
-                "history_at": "2023-02-01T00:00:00+00:00",
+                "history_at": "2023-02-01T00:00:00Z",
                 "type": "INCOME",
             },
         ],
@@ -84,7 +84,7 @@ async def test_get_history(ac, session: AsyncSession):
         "history_id": ANY,
         "name": "egg",
         "amount": 300,
-        "history_at": "2023-02-01T01:00:00+00:00",
+        "history_at": "2023-02-01T01:00:00Z",
         "type": "OUTCOME",
     }
 
@@ -106,7 +106,7 @@ async def test_post_history(ac, session: AsyncSession):
         json={
             "name": "spam",
             "amount": 400,
-            "history_at": "2023-02-01T02:00:00+00:00",
+            "history_at": "2023-02-01T02:00:00Z",
             "type": "OUTCOME",
         },
     )
@@ -115,7 +115,7 @@ async def test_post_history(ac, session: AsyncSession):
         "history_id": ANY,
         "name": "spam",
         "amount": 400,
-        "history_at": "2023-02-01T02:00:00+00:00",
+        "history_at": "2023-02-01T02:00:00Z",
         "type": "OUTCOME",
     }
     await session.refresh(wallet)
@@ -138,7 +138,7 @@ async def test_put_history(ac, session: AsyncSession):
         json={
             "name": "spam",
             "amount": 600,
-            "history_at": "2023-02-01T02:00:00+00:00",
+            "history_at": "2023-02-01T02:00:00Z",
             "type": "OUTCOME",
         },
     )
@@ -147,7 +147,7 @@ async def test_put_history(ac, session: AsyncSession):
         "history_id": ANY,
         "name": "spam",
         "amount": 600,
-        "history_at": "2023-02-01T02:00:00+00:00",
+        "history_at": "2023-02-01T02:00:00Z",
         "type": "OUTCOME",
     }
     await session.refresh(history)
@@ -206,7 +206,7 @@ async def test_move_history(ac, session: AsyncSession):
         "history_id": history_id,
         "name": "egg",
         "amount": 300,
-        "history_at": "2023-02-01T01:00:00+00:00",
+        "history_at": "2023-02-01T01:00:00Z",
         "type": "OUTCOME",
     }
     await session.refresh(foo_wallet)

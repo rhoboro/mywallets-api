@@ -56,7 +56,7 @@ class HistoryORM(BaseORM):
         )
 
     def to_entity(self) -> History:
-        return History.from_orm(self)
+        return History.model_validate(self)
 
     def update(self, history: History) -> None:
         self.name = history.name
@@ -91,7 +91,7 @@ class WalletORM(BaseORM):
         )
 
     def to_entity(self) -> Wallet:
-        return Wallet.from_orm(self)
+        return Wallet.model_validate(self)
 
     def update(self, wallet: Wallet, histories: list[HistoryORM]) -> None:
         self.name = wallet.name

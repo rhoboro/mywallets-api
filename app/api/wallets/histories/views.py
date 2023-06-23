@@ -4,6 +4,7 @@ from app.routes import LoggingRoute
 from .schemas import (
     GetHistoriesResponse,
     GetHistoryResponse,
+    History,
     MoveHistoryRequest,
     MoveHistoryResponse,
     PostHistoryRequest,
@@ -33,7 +34,8 @@ async def get_histories(
 ) -> GetHistoriesResponse:
     """収支項目の一覧取得API"""
     return GetHistoriesResponse(
-        histories=await use_case.execute(wallet_id)
+        histories=[History.model_validate(h)
+            for h in await use_case.execute(wallet_id)]
     )
 
 @router.get(
@@ -48,7 +50,7 @@ async def get_history(
     ],
 ) -> GetHistoryResponse:
     """収支項目の個別取得API"""
-    return GetHistoryResponse.from_orm(
+    return GetHistoryResponse.model_validate(
         await use_case.execute(
             wallet_id=wallet_id,
             history_id=history_id,
@@ -68,7 +70,7 @@ async def post_history(
     ],
 ) -> PostHistoryResponse:
     """収支項目の作成API"""
-    return PostHistoryResponse.from_orm(
+    return PostHistoryResponse.model_validate(
         await use_case.execute(
             wallet_id=wallet_id,
             name=data.name,
@@ -92,7 +94,7 @@ async def put_history(
     ],
 ) -> PutHistoryResponse:
     """収支項目の更新API"""
-    return PutHistoryResponse.from_orm(
+    return PutHistoryResponse.model_validate(
         await use_case.execute(
             wallet_id=wallet_id,
             history_id=history_id,
@@ -138,7 +140,7 @@ async def move_history(
     収支項目を指定したWalletに移動する
     移動成功後は元の場所へのリクエストは404になる
     """
-    return MoveHistoryResponse.from_orm(
+    return MoveHistoryResponse.model_validate(
         await use_case.execute(
             wallet_id=wallet_id,
             history_id=history_id,
