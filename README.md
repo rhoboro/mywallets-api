@@ -15,8 +15,11 @@ $ source env/bin/activate
 ## 開発サーバーの起動
 
 ```bash
+# http://127.0.0.1:8000/docs でAPIドキュメントが表示されます
 (env) $ uvicorn app.main:app --reload
 ```
+
+![APIドキュメント](images/docs.png)
 
 ## ユニットテストの実行
 
