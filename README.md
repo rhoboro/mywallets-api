@@ -1,10 +1,6 @@
 # MyWallets API
 
-WEB+DB PRESS Vol.136 特集記事「Python最新Web開発」の第6章のソースコードです
-
-## ブランチ
-
-- main
+WEB+DB PRESS Vol.136 特集記事「Python最新Web開発」の第6章のソースコードです。
 
 ## 使用するライブラリのインストール
 
@@ -28,4 +24,9 @@ $ source env/bin/activate
 (env) $ pip install pytest==7.4.0 httpx==0.24.1
 (env) $ pytest app -v
 ```
+
+## その他
+
+本リポジトリはWEB+DB PRESS Vol.136のために用意したものですが、個人のOSS活動の一環として数年前から公開しているサンプルプロジェクト[rhoboro/async-fastapi-sqlalchemy](https://github.com/rhoboro/async-fastapi-sqlalchemy)があります。  
+このプロジェクトではWEB+DB PRESS Vol.136ではスペースの都合上解説できなかった、DBマイグレーション管理やPostgreSQLを採用した場合のテスト用DB作成方法などを行っています。ぜひご参考にしてみてください。
 
